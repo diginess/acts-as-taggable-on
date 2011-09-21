@@ -3,7 +3,7 @@ module ActsAsTaggableOn
     include ActsAsTaggableOn::ActiveRecord::Backports if ::ActiveRecord::VERSION::MAJOR < 3
     include ActsAsTaggableOn::Utils
       
-    attr_accessible :name
+    attr_accessible :name, :lang
 
     ### ASSOCIATIONS:
 
@@ -11,7 +11,7 @@ module ActsAsTaggableOn
 
     ### VALIDATIONS:
 
-    validates_presence_of :name
+    validates_presence_of :name, :lang
     validates_uniqueness_of :name
 
     ### SCOPES:
@@ -56,7 +56,7 @@ module ActsAsTaggableOn
     ### INSTANCE METHODS:
 
     def ==(object)
-      super || (object.is_a?(Tag) && name == object.name)
+      super || (object.is_a?(Tag) && name == object.name && lang == object.lang)
     end
 
     def to_s
